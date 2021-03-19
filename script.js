@@ -1,4 +1,3 @@
-
 // clicks and buttons sound
 const WHITE_KEYS = ['z', 'x', 'c', 'v', 'b', 'n', 'm']
 const BLACK_KEYS = ['s', 'd', ' ', 'g', 'h', 'j']
@@ -9,18 +8,36 @@ const whiteKeys = document.querySelectorAll('.piano-key')
 const blackKeys = document.querySelectorAll('.piano-key.sharp')
 
 keys.forEach(key => {
-  key.addEventListener('click', () => playNote(key))
+  key.addEventListener('mousedown', () => playNote(key))
 })
+
+keys.forEach(key => {
+  key.addEventListener('mouseup', () => removeStyle(key))
+})
+
 
 document.addEventListener('keydown', e => {
   if (e.repeat) return
-  const key = e.key
+  const key = e.key.toLowerCase();
   const whiteKeyIndex = WHITE_KEYS.indexOf(key)
   const blackKeyIndex = BLACK_KEYS.indexOf(key)
 
   if (whiteKeyIndex > -1) playNote(whiteKeys[whiteKeyIndex])
   if (blackKeyIndex > -1) playNote(blackKeys[blackKeyIndex])
 })
+
+
+document.addEventListener('keyup', e => {
+  if (e.repeat) return
+  const key = e.key.toLowerCase();
+  const whiteKeyIndex = WHITE_KEYS.indexOf(key)
+  const blackKeyIndex = BLACK_KEYS.indexOf(key)
+
+  if (whiteKeyIndex > -1) removeStyle(whiteKeys[whiteKeyIndex])
+  if (blackKeyIndex > -1) removeStyle(blackKeys[blackKeyIndex])
+})
+
+
 
 function playNote(key) {
   const noteAudio = document.getElementById(key.dataset.note)
@@ -30,7 +47,14 @@ function playNote(key) {
   noteAudio.addEventListener('ended', () => {
     key.classList.remove('active')
   })
+  key.classList.add('piano-key-active');  
 }
+
+function removeStyle (key){
+  key.classList.remove('piano-key-active');
+}
+
+
 
 // fullscreen
 
@@ -66,7 +90,7 @@ function toggleFullScreen() {
   }
 }
 
-// notes/letters
+// notes/letters button
 
 const notes = document.querySelector('.btn-notes');
 const letters = document.querySelector('.btn-letters');
@@ -82,10 +106,12 @@ function changeButtons(event) {
     event.target.classList.add('btn-active');
     notes.classList.remove('btn-active');
   }
-  else{
+  else {
     keys.forEach(key => key.classList.remove('piano-key-letter'));
     event.target.classList.add('btn-active');
     letters.classList.remove('btn-active');
   }
 
 }
+
+

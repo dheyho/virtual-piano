@@ -1,6 +1,6 @@
 // clicks and buttons sound
-const WHITE_KEYS = ['z', 'x', 'c', 'v', 'b', 'n', 'm']
-const BLACK_KEYS = ['s', 'd', ' ', 'g', 'h', 'j']
+const WHITE_KEYS = ['KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM']
+const BLACK_KEYS = ['KeyS', 'KeyD', ' ', 'KeyG', 'KeyH', 'KeyJ']
 
 const keys = document.querySelectorAll('.piano-key')
 
@@ -17,26 +17,38 @@ keys.forEach(key => {
 
 
 document.addEventListener('keydown', e => {
-  if (e.repeat) return
-  const key = e.key.toLowerCase();
-  const whiteKeyIndex = WHITE_KEYS.indexOf(key)
-  const blackKeyIndex = BLACK_KEYS.indexOf(key)
+  const key = e.code; 
+  for (let i = 0; i < WHITE_KEYS.length; i++){
+    if (key == WHITE_KEYS[i]){
+      
+      playNote(whiteKeys[i]);
+    }
+  }
 
-  if (whiteKeyIndex > -1) playNote(whiteKeys[whiteKeyIndex])
-  if (blackKeyIndex > -1) playNote(blackKeys[blackKeyIndex])
+  for (let i = 0; i < BLACK_KEYS.length; i++){
+    if (key == BLACK_KEYS[i]){
+      
+      playNote(blackKeys[i]);
+    }
+  }
 })
-
 
 document.addEventListener('keyup', e => {
-  if (e.repeat) return
-  const key = e.key.toLowerCase();
-  const whiteKeyIndex = WHITE_KEYS.indexOf(key)
-  const blackKeyIndex = BLACK_KEYS.indexOf(key)
+  const key = e.code; 
+  for (let i = 0; i < WHITE_KEYS.length; i++){
+    if (key == WHITE_KEYS[i]){
+      
+      removeStyle(whiteKeys[i]);
+    }
+  }
 
-  if (whiteKeyIndex > -1) removeStyle(whiteKeys[whiteKeyIndex])
-  if (blackKeyIndex > -1) removeStyle(blackKeys[blackKeyIndex])
+  for (let i = 0; i < BLACK_KEYS.length; i++){
+    if (key == BLACK_KEYS[i]){
+      
+      removeStyle(blackKeys[i]);
+    }
+  }
 })
-
 
 
 function playNote(key) {

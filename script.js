@@ -1,4 +1,7 @@
-// clicks and buttons sound
+// mouse and keys sounds
+
+
+// initializating arrays for the relevant keyboard buttons
 const WHITE_KEYS = ['KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM']
 const BLACK_KEYS = ['KeyS', 'KeyD', ' ', 'KeyG', 'KeyH', 'KeyJ']
 
@@ -7,50 +10,80 @@ const keys = document.querySelectorAll('.piano-key')
 const whiteKeys = document.querySelectorAll('.piano-key')
 const blackKeys = document.querySelectorAll('.piano-key.sharp')
 
+// declare flag for definition mousedown/mouseup
+let isClicked = false;
+
+// process events for mousedown/up/over/out
 keys.forEach(key => {
-  key.addEventListener('mousedown', () => playNote(key))
+  key.addEventListener('mousedown', () => {
+    isClicked = true;
+    playNote(key);
+  })
+});
+
+keys.forEach(key => {
+  key.addEventListener('mouseup', () => {
+    removeStyle(key);
+  })
+});
+
+
+document.addEventListener('mouseup', () => {
+  isClicked = false;
 })
 
+
 keys.forEach(key => {
-  key.addEventListener('mouseup', () => removeStyle(key))
-})
+  key.addEventListener('mouseover', () => {
+
+    if (isClicked == true) {
+      playNote(key);
+
+    }
+  })
+});
+
+keys.forEach(key => {
+  key.addEventListener('mouseout', () => removeStyle(key))
+});
 
 
+// process events for keydown/up
 document.addEventListener('keydown', e => {
-  const key = e.code; 
-  for (let i = 0; i < WHITE_KEYS.length; i++){
-    if (key == WHITE_KEYS[i]){
-      
+  if (e.repeat) return;
+  const key = e.code;
+
+  for (let i = 0; i < WHITE_KEYS.length; i++) {
+    if (key == WHITE_KEYS[i]) {
       playNote(whiteKeys[i]);
     }
   }
 
-  for (let i = 0; i < BLACK_KEYS.length; i++){
-    if (key == BLACK_KEYS[i]){
-      
+  for (let i = 0; i < BLACK_KEYS.length; i++) {
+    if (key == BLACK_KEYS[i]) {
       playNote(blackKeys[i]);
     }
   }
 })
 
 document.addEventListener('keyup', e => {
-  const key = e.code; 
-  for (let i = 0; i < WHITE_KEYS.length; i++){
-    if (key == WHITE_KEYS[i]){
-      
+  const key = e.code;
+  for (let i = 0; i < WHITE_KEYS.length; i++) {
+    if (key == WHITE_KEYS[i]) {
+
       removeStyle(whiteKeys[i]);
     }
   }
 
-  for (let i = 0; i < BLACK_KEYS.length; i++){
-    if (key == BLACK_KEYS[i]){
-      
+  for (let i = 0; i < BLACK_KEYS.length; i++) {
+    if (key == BLACK_KEYS[i]) {
+
       removeStyle(blackKeys[i]);
     }
   }
 })
 
-
+// function for playing sounds
 function playNote(key) {
   const noteAudio = document.getElementById(key.dataset.note)
   noteAudio.currentTime = 0
@@ -59,12 +92,14 @@ function playNote(key) {
   noteAudio.addEventListener('ended', () => {
     key.classList.remove('active')
   })
-  key.classList.add('piano-key-active');  
+  key.classList.add('piano-key-active');
 }
 
-function removeStyle (key){
+// function for removing styles from piano keys
+function removeStyle(key) {
   key.classList.remove('piano-key-active');
 }
+
 
 
 
@@ -125,5 +160,4 @@ function changeButtons(event) {
   }
 
 }
-
 

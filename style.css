@@ -230,36 +230,26 @@ body {
 	font-size: 16px;
 	font-family: "Open Sans", sans-serif;
 	transition: 0.3s;
+	text-decoration: none;
 }
 .github:hover {
 	color: #fff;
 }
-.rss {
+.telegram {
 	display: block;
 	position: relative;
 	font-family: "Open Sans", sans-serif;
-	width: 86px;
-	height: 32px;
-	background-image: url("assets/svg/rss.svg");
+	width: 35px;
+	height: 35px;
+	background-image: url("assets/svg/tg_logo.svg");
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: left center;
-	padding-right: 111px;
+	padding-right: 45px;
 }
-.rss-year {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	font-size: 21px;
-	letter-spacing: -2px;
-	color: #cbd5de;
-	line-height: 0.9;
-	font-weight: bold;
-	transition: 0.3s;
-}
-.rss:hover .rss-year {
-	right: -5px;
-	letter-spacing: 0;
+
+.telegram:hover{
+	opacity: 0.75;
 }
 @media (max-width: 768px) {
 	.fullscreen {

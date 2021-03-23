@@ -69,6 +69,7 @@ body {
 }
 .btn:active {
 	background-color: #00c9b7;
+	
 }
 .btn-active {
 	background-color: #00b4a4;
@@ -97,6 +98,7 @@ body {
 }
 .piano-key:hover {
 	background-color: #fff;
+	
 }
 .keys-sharp {
 	position: absolute;
@@ -121,6 +123,7 @@ body {
 }
 .piano-key.piano-key-active,
 .piano-key.sharp.piano-key-active {
+
 	transform: scale(0.96);
 }
 .piano-key.none {
@@ -179,7 +182,7 @@ body {
 .piano-key-active-pseudo:hover::before,
 .piano-key-active::after,
 .piano-key-active::before {
-	color: #00b4a4;
+	color: #00b4a4 !important;
 }
 
 .fullscreen {
